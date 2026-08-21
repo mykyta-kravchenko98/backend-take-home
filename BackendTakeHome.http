@@ -1,0 +1,29 @@
+@host = http://localhost:5080
+
+### 1. Create a user
+# @name createUser
+POST {{host}}/api/users
+Content-Type: application/json
+
+{
+  "username": "ada"
+}
+
+### 2. Get the created user
+@userId = {{createUser.response.body.$.id}}
+GET {{host}}/api/users/{{userId}}
+Accept: application/json
+
+### 3. Create a work item assigned to the user
+# @name createWorkItem
+POST {{host}}/api/work-items
+Content-Type: application/json
+
+{
+  "name": "Prepare submission",
+  "assigneeId": "{{userId}}"
+}
+
+### 4. List work items assigned to the user
+GET {{host}}/api/work-items?assigneeId={{userId}}
+Accept: application/json
