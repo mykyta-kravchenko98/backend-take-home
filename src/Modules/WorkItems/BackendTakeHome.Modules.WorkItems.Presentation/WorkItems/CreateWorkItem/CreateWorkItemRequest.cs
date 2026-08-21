@@ -1,0 +1,3 @@
+namespace BackendTakeHome.Modules.WorkItems.Presentation.WorkItems.CreateWorkItem;
+
+public sealed record CreateWorkItemRequest(string Name, Guid AssigneeId);
