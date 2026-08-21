@@ -4,8 +4,8 @@ using Xunit;
 
 namespace BackendTakeHome.Api.IntegrationTests;
 
+[Collection(ApiIntegrationCollection.Name)]
 public sealed class HostSmokeTests(WebApplicationFactory<Program> factory)
-    : IClassFixture<WebApplicationFactory<Program>>
 {
     [Fact]
     public async Task Host_starts_and_serves_the_root_endpoint()
