@@ -2,6 +2,7 @@ using BackendTakeHome.Common.Domain;
 using BackendTakeHome.Modules.WorkItems.Application.WorkItems.CreateWorkItem;
 using FastEndpoints;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 
 namespace BackendTakeHome.Modules.WorkItems.Presentation.WorkItems.CreateWorkItem;
 
@@ -30,7 +31,14 @@ public sealed class CreateWorkItemEndpoint(ISender sender)
                 return;
             }
 
-            await SendAsync(new CreateWorkItemResponse(Guid.Empty), 400, cancellationToken);
+            await SendResultAsync(Results.Problem(
+                statusCode: StatusCodes.Status400BadRequest,
+                title: "Work item creation failed",
+                detail: result.Error.Description,
+                extensions: new Dictionary<string, object?>
+                {
+                    ["code"] = result.Error.Code
+                }));
             return;
         }
 

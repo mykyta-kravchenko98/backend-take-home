@@ -1,6 +1,7 @@
 using BackendTakeHome.Modules.Users.Application.Users.CreateUser;
 using FastEndpoints;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 
 namespace BackendTakeHome.Modules.Users.Presentation.Users.CreateUser;
 
@@ -18,7 +19,14 @@ public sealed class CreateUserEndpoint(ISender sender) : Endpoint<CreateUserRequ
 
         if (result.IsFailure)
         {
-            await SendAsync(new CreateUserResponse(Guid.Empty), 400, cancellationToken);
+            await SendResultAsync(Results.Problem(
+                statusCode: StatusCodes.Status400BadRequest,
+                title: "User creation failed",
+                detail: result.Error.Description,
+                extensions: new Dictionary<string, object?>
+                {
+                    ["code"] = result.Error.Code
+                }));
             return;
         }
 
