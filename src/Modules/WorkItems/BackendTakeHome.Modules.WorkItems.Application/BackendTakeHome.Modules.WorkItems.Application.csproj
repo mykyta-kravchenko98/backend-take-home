@@ -1,0 +1,7 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="../BackendTakeHome.Modules.WorkItems.Domain/BackendTakeHome.Modules.WorkItems.Domain.csproj" />
+    <ProjectReference Include="../../../Common/BackendTakeHome.Common.Application/BackendTakeHome.Common.Application.csproj" />
+    <ProjectReference Include="../../Users/BackendTakeHome.Modules.Users.Contracts/BackendTakeHome.Modules.Users.Contracts.csproj" />
+  </ItemGroup>
+</Project>

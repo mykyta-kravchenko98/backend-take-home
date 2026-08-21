@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="../BackendTakeHome.Modules.Users.Application/BackendTakeHome.Modules.Users.Application.csproj" />
+    <ProjectReference Include="../BackendTakeHome.Modules.Users.Contracts/BackendTakeHome.Modules.Users.Contracts.csproj" />
+    <ProjectReference Include="../BackendTakeHome.Modules.Users.Domain/BackendTakeHome.Modules.Users.Domain.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
+  </ItemGroup>
+</Project>
