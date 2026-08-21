@@ -1,0 +1,35 @@
+name: Build, lint, and test
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    name: Build, lint, and test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.302
+
+      - name: Restore dependencies
+        run: dotnet restore BackendTakeHome.sln
+
+      - name: Verify formatting
+        run: dotnet format BackendTakeHome.sln --verify-no-changes --no-restore
+
+      - name: Build
+        run: dotnet build BackendTakeHome.sln --configuration Release --no-restore
+
+      - name: Test
+        run: dotnet test BackendTakeHome.sln --configuration Release --no-build
